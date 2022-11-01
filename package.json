@@ -1,0 +1,65 @@
+{
+  "name": "boilerplate-api-node-express",
+  "version": "1.0.0",
+  "description": "boilerplate api node with express",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha './test/**/*test.js'",
+    "test:coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text mocha './test/**/*test.js'",
+    "migration": "npx sequelize-cli db:migrate",
+    "migration:create": "npx sequelize-cli migration:generate --name"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@config": "./src/config"
+  },
+  "pre-commit": [
+    "test",
+    "test:coverage"
+  ],
+  "eslintIgnore": [
+    "*.test.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcosVictorSB/boilerplate-api-node-express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarcosVictorSB/boilerplate-api-node-express/issues"
+  },
+  "homepage": "https://github.com/MarcosVictorSB/boilerplate-api-node-express#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.0.0",
+    "module-alias": "^2.2.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.8",
+    "nodemon": "^2.0.19",
+    "pre-commit": "^1.2.2",
+    "sequelize": "^6.21.3",
+    "sequelize-cli": "^6.4.1",
+    "sinon": "^14.0.0",
+    "sqlite3": "^5.0.10",
+    "winston": "^3.8.1"
+  },
+  "devDependencies": {
+    "babel-plugin-istanbul": "^6.1.1",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nyc": "^15.1.0"
+  }
+}
