@@ -19,7 +19,7 @@ module.exports = (request, response, next) => {
   response.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,PATCH,DELETE');
   response.set(
     'Access-Control-Allow-Headers',
-    'Content-Type,Accept,Accept-Encoding,Accept-Language,X-Access-Token,X-Key,Authorization,X-request-Id,Prefer,X-Logged-Area'
-  );
+    'Content-Type,Accept,Accept-Encoding,Accept-Language,X-Access-Token,X-Key,Authorization,X-request-Id,Prefer,X-Logged-Area');
+
   next();
 };
