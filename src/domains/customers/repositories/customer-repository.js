@@ -35,6 +35,16 @@ class CustomerRepository {
       return this.httpResponseStatusCode.serverError(error.message);
     }
   }
+
+  async delete(id) {
+    try {
+      const customer = await this.model.destroy({ id, truncate: true });
+      return customer;
+    } catch (error) {
+      this.logger.error({ error }, '[CUSTOMER REPOSITORY DELETE] - error to delete user');
+      throw this.httpResponseStatusCode.serverError(error.message);
+    }
+  }
 }
 
 module.exports = CustomerRepository;

@@ -32,6 +32,13 @@ const Customers = database.define(
       allowNull: false,
       type: Sequelize.DATE,
     },
+    deletedAt: {
+      allowNull: true,
+      type: Sequelize.DATE,
+    },
+  },
+  {
+    paranoid: true,
   },
 );
 
