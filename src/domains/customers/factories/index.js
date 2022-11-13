@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 const CustomerService = require('../services/customer-service');
 const CustomerController = require('../controller/customer-controllers');
 const CustomerRepository = require('../repositories/customer-repository');
@@ -26,6 +27,7 @@ const getService = (params = {}) => new CustomerService({
   adapterToken: params.adapterToken || new AdapterToken(),
   httpResponseStatusCode: params.httpResponseStatusCode || new HttpResponseStatusCodes(),
   emailService: params.emailService || getServiceEmail(),
+  uuidv4: params.uuidv4 || uuidv4(),
 });
 
 const getController = (params = {}) => new CustomerController({

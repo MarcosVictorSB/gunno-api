@@ -7,6 +7,7 @@ class CustomerService {
     this.adapterToken = params.adapterToken;
     this.httpResponseStatusCode = params.httpResponseStatusCode;
     this.emailService = params.emailService;
+    this.uuidv4 = params.uuidv4;
   }
 
   async create(params) {
@@ -21,10 +22,11 @@ class CustomerService {
       }
 
       const newCustomer = {
+        id: this.uuidv4,
         name,
         email,
         password: await this.adapterEncryption.generateHashPassword(password),
-        admin,
+        admin: !!admin,
       };
 
       const customer = await this.repository.create(newCustomer);
