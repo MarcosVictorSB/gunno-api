@@ -60,10 +60,11 @@ describe('CUSTOMER SERVICE', () => {
     ];
 
     this.customerWithPasswordEncrypt = {
+      id: 'uuidv4',
       name: 'any_name',
       email: 'any_email',
       password: 'encryption_password',
-      admin: undefined
+      admin: false
     };
 
     this.customerRemovePassword = {
@@ -84,6 +85,7 @@ describe('CUSTOMER SERVICE', () => {
   describe('CREATE', () => {
     beforeEach(() => {
       this.service.removePassword = stub().returns();
+      this.service.uuidv4 = 'uuidv4';
     })
 
     it('call conflict (status code 409) when exist customer with same email', async () => {
@@ -203,7 +205,7 @@ describe('CUSTOMER SERVICE', () => {
       calledOnce(this.service.httpResponseStatusCode.serverError);
     });
 
-    it('call serverError (status code 500) when adapterToken.sign rejects', async () => {
+    it.only('call serverError (status code 500) when adapterToken.sign rejects', async () => {
       this.service.adapterToken.sign = stub().rejects();
       this.service.repository.create = stub().resolves(this.customer);
 
