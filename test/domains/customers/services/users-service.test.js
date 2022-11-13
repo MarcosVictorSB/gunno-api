@@ -63,6 +63,7 @@ describe('CUSTOMER SERVICE', () => {
       name: 'any_name',
       email: 'any_email',
       password: 'encryption_password',
+      admin: undefined
     };
 
     this.customerRemovePassword = {

@@ -11,9 +11,9 @@ class CustomerService {
 
   async create(params) {
     try {
-      console.log(params);
-      const { name, email, password } = params;
-      console.log({ name, email, password });
+      const {
+        name, email, password, admin,
+      } = params;
       const customerExists = await this.repository.getByEmail(email);
       if (customerExists) {
         this.logger.info(`[CUSTOMER SERVICE] - ${this.enumHelperCustomer.alreadyExists} : ${email}`);
@@ -24,6 +24,7 @@ class CustomerService {
         name,
         email,
         password: await this.adapterEncryption.generateHashPassword(password),
+        admin,
       };
 
       const customer = await this.repository.create(newCustomer);

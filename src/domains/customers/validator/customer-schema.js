@@ -7,6 +7,7 @@ const schema = Joi.object({
     .required(),
   email: Joi.string()
     .required(),
+  admin: Joi.boolean(),
   password: Joi.string()
     .pattern(/^[a-zA-Z0-9]{3,30}$/),
   passwordRepeat: Joi.ref('password'),
