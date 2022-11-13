@@ -99,6 +99,17 @@ class CustomerService {
       return this.httpResponseStatusCode.serverError(error.message);
     }
   }
+
+  async delete(id) {
+    try {
+      const customer = await this.repository.delete(id);
+      if (!customer) return this.httpResponseStatusCode.noContent('Usuario não encontrado');
+      return this.httpResponseStatusCode.OK('Usuario deletado');
+    } catch (error) {
+      this.logger.error('[CUSTOMER SERVICE DELETE] - error delete customer');
+      throw this.httpResponseStatusCode.serverError(error.message);
+    }
+  }
 }
 
 module.exports = CustomerService;

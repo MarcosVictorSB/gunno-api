@@ -51,6 +51,17 @@ class CustomerController extends Controller {
       return this.errorHandler(error, request, response);
     }
   }
+
+  async delete(request, response) {
+    try {
+      const { id } = request.query;
+      const result = await this.service.delete(id);
+      return response.status(result.status).json(result.body);
+    } catch (error) {
+      this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
+      return this.errorHandler(error, request, response);
+    }
+  }
 }
 
 module.exports = CustomerController;
