@@ -205,7 +205,7 @@ describe('CUSTOMER SERVICE', () => {
       calledOnce(this.service.httpResponseStatusCode.serverError);
     });
 
-    it.only('call serverError (status code 500) when adapterToken.sign rejects', async () => {
+    it('call serverError (status code 500) when adapterToken.sign rejects', async () => {
       this.service.adapterToken.sign = stub().rejects();
       this.service.repository.create = stub().resolves(this.customer);
 
