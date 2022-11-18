@@ -15,7 +15,7 @@ const getRepository = () => new InterestedRepository({
 const getService = () => new InterestedService({
   repository: getRepository(),
   logger,
-  HttpResponseStatusCodes,
+  responseStatusCode: new HttpResponseStatusCodes(),
   enumHelperInterested,
 });
 

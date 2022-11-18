@@ -10,11 +10,11 @@ class InterestedController extends Controller {
   async interested(request, response) {
     try {
       const { email } = request.body;
-      await this.service.saveInterested(email);
-      return response.render('index');
+      const result = await this.service.saveInterested(email);
+      return response.status(result.status).json(result.body);
     } catch (error) {
       this.logger.error({ error }, '[INTERESTED CONTROLLER] - error to save possible customer');
-      return response.render('index');
+      return this.errorHandler(error, request, response);
     }
   }
 }

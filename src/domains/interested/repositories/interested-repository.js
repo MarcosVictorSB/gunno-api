@@ -7,11 +7,11 @@ class InterestedRepository {
 
   async saveInterested(email) {
     try {
-      await this.model.create({ email });
-      return 0;
+      const result = await this.model.create({ email });
+      return result.dataValues;
     } catch (error) {
       this.logger.error({ error }, '[INTERESTED REPOSITORY] - error to save possible customer');
-      return this.httpResponseStatusCode.serverError(error.message);
+      throw this.httpResponseStatusCode.serverError(error.message);
     }
   }
 }
