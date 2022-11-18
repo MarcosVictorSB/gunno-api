@@ -7,7 +7,6 @@ const enumHelperCustomer = {
     emailOrPassword: 'email or password is invalid',
     mismatchPassword: 'password mismatch between',
     doNotCustomerRegistered: 'doesn\'t customers registered',
-
   },
 };
 

@@ -1,7 +1,6 @@
 const enumHelperAuthentication = {
   authentication: {
     errorToLogin: 'Happen error to login customer',
-
   },
 };
 
