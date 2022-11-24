@@ -4,7 +4,7 @@ const enumHelperCustomer = {
     notFoundCustomer: 'customer not found',
     updateCustomer: 'customer updated',
     delete: 'customer deleted',
-    emailOrPassword: 'email or password is invalid',
+    emailOrPassword: 'email ou senha inválido',
     mismatchPassword: 'password mismatch between',
     doNotCustomerRegistered: 'doesn\'t customers registered',
   },
