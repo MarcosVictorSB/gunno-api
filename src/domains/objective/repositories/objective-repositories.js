@@ -16,12 +16,28 @@ class ObjectiveRepository {
     }
   }
 
-  async getById(paramsId) {
-
+  async getById(objectiveId) {
+    try {
+      const result = await this.model.findByPk(objectiveId);
+      return result ? result.dataValues : null;
+    } catch (error) {
+      this.logger.error({ error }, `[REPOSITORY OBJECTIVE] - ${this.errors.create}`);
+      throw this.httpResponseStatusCodes.serverError(this.errors.create);
+    }
   }
 
-  async update(paramsId) {
-
+  async update(objectiveId, params) {
+    try {
+      const result = await this.model.update({ ...params }, {
+        where: {
+          id: objectiveId,
+        },
+      });
+      return result.length ? result : null;
+    } catch (error) {
+      this.logger.error({ error }, `[REPOSITORY OBJECTIVE] - ${this.errors.create}`);
+      throw this.httpResponseStatusCodes.serverError(this.errors.create);
+    }
   }
 
   async delete(paramsId) {

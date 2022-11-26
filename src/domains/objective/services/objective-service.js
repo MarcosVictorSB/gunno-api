@@ -4,6 +4,7 @@ class ObjectiveService {
     this.httpResponseStatusCodes = params.httpResponseStatusCodes;
     this.errors = params.errors;
     this.helpers = params.helpers;
+    this.message = params.message;
   }
 
   async create(params) {
@@ -20,12 +21,30 @@ class ObjectiveService {
       throw this.httpResponseStatusCodes.serverError(error);
     }
   }
+
   async getById(objectiveId) {
-
+    try {
+      const result = await this.repository.getById(objectiveId);
+      return this.httpResponseStatusCodes.OK(result);
+    } catch (error) {
+      this.logger.error(`[OBJECTIVE SERVICE] - ${this.errors.getById}`);
+      throw this.httpResponseStatusCodes.serverError(error);
+    }
   }
-  async update(objectiveId) {
 
+  async update(objectiveId, params) {
+    try {
+      const objective = await this.repository.getById(objectiveId);
+      if (!objective) return this.httpResponseStatusCodes.OK(this.message.notFound);
+
+      await this.repository.update(objectiveId, params);
+      return this.httpResponseStatusCodes.noContent(this.message.update);
+    } catch (error) {
+      this.logger.error(`[OBJECTIVE SERVICE] - ${this.errors.getById}`);
+      throw this.httpResponseStatusCodes.serverError(error);
+    }
   }
+
   async delete(objectiveId) {
 
   }

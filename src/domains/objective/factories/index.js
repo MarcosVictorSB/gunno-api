@@ -5,6 +5,7 @@ const { HttpResponseStatusCodes } = require('../../../protocols/httpResponseStat
 const ObjectiveModel = require('../../../infra/database/models/objectives');
 const logger = require('../../../config/logger');
 const errors = require('../../../helpers/errors/objective-errors');
+const message = require('../../../helpers/messages/objective-message');
 const helpers = require('../helpers');
 
 const getRepository = () => new ObjectiveRepository({
@@ -19,6 +20,7 @@ const getService = () => new ObjectiveService({
   httpResponseStatusCodes: new HttpResponseStatusCodes(),
   errors,
   helpers,
+  message,
 });
 
 const getController = () => new ObjectiveController({

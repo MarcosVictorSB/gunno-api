@@ -17,12 +17,30 @@ class ObjectiveController extends Controller {
       return this.errorHandler(error, request, response);
     }
   }
+
   async getById(request, response) {
-
+    try {
+      const { id: objectiveId } = request.params;
+      const result = await this.service.getById(objectiveId);
+      return response.status(result.status).json(result.body);
+    } catch (error) {
+      this.logger.error({ error }, `[OBJECTIVE CONTROLLER] - ${this.errors.getById}`);
+      return this.errorHandler(error, request, response);
+    }
   }
+
   async update(request, response) {
-
+    try {
+      const objectiveId = request.params.id;
+      const params = request.body;
+      const result = await this.service.update(objectiveId, params);
+      return response.status(result.status).json(result.body);
+    } catch (error) {
+      this.logger.error({ error }, `[OBJECTIVE CONTROLLER] - ${this.errors.getById}`);
+      return this.errorHandler(error, request, response);
+    }
   }
+
   async delete(request, response) {
 
   }
