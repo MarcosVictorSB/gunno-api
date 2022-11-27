@@ -41,7 +41,7 @@ class IRepository {
   async delete(id) {
     try {
       const result = await this.model.destroy({ where: { id } });
-      return result.length ? result : null;
+      return result || null;
     } catch (error) {
       this.logger.error({ error }, `[REPOSITORY] - Error to delete: ${id}`);
       throw this.httpResponseStatusCodes.serverError(error);
