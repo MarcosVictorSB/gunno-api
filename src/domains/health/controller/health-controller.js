@@ -3,7 +3,7 @@ const logger = require('../../../config/logger');
 
 class healthController extends Controller {
   constructor(params = {}) {
-    super();
+    super(params);
     this.service = params.service;
     this.logger = params.logger || logger;
   }
