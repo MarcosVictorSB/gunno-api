@@ -5,8 +5,17 @@ class IService {
     this.repository = params.repository;
     this.httpResponseStatusCodes = params.httpResponseStatusCodes;
     this.errors = params.errors;
-    this.helpers = params.helpers;
     this.logger = params.logger;
+  }
+
+  async create(params) {
+    try {
+      const result = await this.repository.create(params);
+      return this.httpResponseStatusCodes.created(result);
+    } catch (error) {
+      this.logger.error(`[INTERFACE SERVICE] - ${this.errors.create}`);
+      throw this.httpResponseStatusCodes.serverError(error);
+    }
   }
 
   async getById(id) {

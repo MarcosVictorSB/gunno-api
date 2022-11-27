@@ -2,7 +2,7 @@ const Controller = require('../../../interfaces/base-controller');
 
 class AuthenticationController extends Controller {
   constructor(params = {}) {
-    super();
+    super(params);
     this.serviceAuth = params.serviceAuth;
     this.validator = params.validator;
     this.customerService = params.customerService;

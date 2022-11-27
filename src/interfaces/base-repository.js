@@ -3,7 +3,6 @@ class IRepository {
     this.logger = params.logger;
     this.model = params.model;
     this.httpResponseStatusCodes = params.httpResponseStatusCodes;
-    this.errors = params.errors;
   }
 
   async create(params) {

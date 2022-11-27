@@ -2,7 +2,7 @@ const Controller = require('../../../interfaces/base-controller');
 
 class CustomerController extends Controller {
   constructor(params = {}) {
-    super();
+    super(params);
     this.service = params.service;
     this.logger = params.logger;
     this.enumHelperCustomer = params.enumHelperCustomer;

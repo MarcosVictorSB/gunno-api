@@ -1,6 +1,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Objectives', {
+    await queryInterface.createTable('Teams', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -14,14 +14,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      quarter: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      year: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -34,6 +26,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Objectives');
+    await queryInterface.dropTable('Teams');
   },
 };
