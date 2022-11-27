@@ -38,7 +38,9 @@ class ObjectiveService {
       const objective = await this.repository.getById(objectiveId);
       if (!objective) return this.httpResponseStatusCodes.OK(this.message.notFound);
 
-      await this.repository.update(objectiveId, params);
+      const objectiveUpdated = await this.repository.update(objectiveId, params);
+      if (!objectiveUpdated) return this.httpResponseStatusCodes.OK(this.message.notUpdated);
+
       return this.httpResponseStatusCodes.noContent(this.message.update);
     } catch (error) {
       this.logger.error(`[OBJECTIVE SERVICE] - ${this.errors.getById}`);
@@ -49,9 +51,11 @@ class ObjectiveService {
   async delete(objectiveId) {
     try {
       const objective = await this.repository.getById(objectiveId);
-
       if (!objective) return this.httpResponseStatusCodes.OK(this.message.notFound);
-      await this.repository.delete(objectiveId);
+
+      const objectiveDeleted = await this.repository.delete(objectiveId);
+      if (!objectiveDeleted) return this.httpResponseStatusCodes.OK(this.message.notDeleted);
+
       return this.httpResponseStatusCodes.OK(this.message.delete);
     } catch (error) {
       this.logger.error(`[OBJECTIVE SERVICE] - ${this.errors.delete}`);
