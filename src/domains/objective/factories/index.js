@@ -21,6 +21,7 @@ const getService = () => new ObjectiveService({
   errors,
   helpers,
   message,
+  logger,
 });
 
 const getController = () => new ObjectiveController({

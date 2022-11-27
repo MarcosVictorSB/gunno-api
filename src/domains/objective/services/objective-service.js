@@ -5,6 +5,7 @@ class ObjectiveService {
     this.errors = params.errors;
     this.helpers = params.helpers;
     this.message = params.message;
+    this.logger = params.logger;
   }
 
   async create(params) {
@@ -46,7 +47,16 @@ class ObjectiveService {
   }
 
   async delete(objectiveId) {
+    try {
+      const objective = await this.repository.getById(objectiveId);
 
+      if (!objective) return this.httpResponseStatusCodes.OK(this.message.notFound);
+      await this.repository.delete(objectiveId);
+      return this.httpResponseStatusCodes.OK(this.message.delete);
+    } catch (error) {
+      this.logger.error(`[OBJECTIVE SERVICE] - ${this.errors.delete}`);
+      throw this.httpResponseStatusCodes.serverError(error);
+    }
   }
 }
 

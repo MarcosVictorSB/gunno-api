@@ -41,7 +41,13 @@ class ObjectiveRepository {
   }
 
   async delete(paramsId) {
-
+    try {
+      const result = await this.model.destroy({ where: { id: paramsId } });
+      return result.length ? result : null;
+    } catch (error) {
+      this.logger.error({ error }, `[REPOSITORY OBJECTIVE] - ${this.errors.delete}`);
+      throw this.httpResponseStatusCodes.serverError(error);
+    }
   }
 }
 

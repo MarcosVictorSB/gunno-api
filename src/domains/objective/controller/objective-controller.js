@@ -42,7 +42,14 @@ class ObjectiveController extends Controller {
   }
 
   async delete(request, response) {
-
+    try {
+      const objectiveId = request.params.id;
+      const result = await this.service.delete(objectiveId);
+      return response.status(result.status).json(result.body);
+    } catch (error) {
+      this.logger.error({ error }, `[OBJECTIVE CONTROLLER] - ${this.errors.delete}`);
+      return this.errorHandler(error, request, response);
+    }
   }
 }
 
