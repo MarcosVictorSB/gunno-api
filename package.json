@@ -44,6 +44,7 @@
     "jsonwebtoken": "^8.5.1",
     "mocha": "^10.0.0",
     "module-alias": "^2.2.2",
+    "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.8",
