@@ -1,6 +1,6 @@
-const Controller = require('../../../interfaces/base-controller');
+const IController = require('../../../interfaces/base-controller');
 
-class CustomerController extends Controller {
+class CustomerController extends IController {
   constructor(params = {}) {
     super(params);
     this.service = params.service;

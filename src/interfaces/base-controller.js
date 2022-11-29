@@ -1,6 +1,6 @@
 const logger = require('../config/logger');
 
-class Controller {
+class IController {
   constructor(params) {
     /* eslint-disable default-param-last */
     this.errorHandler = (error = {}, request, response) => {
@@ -56,4 +56,4 @@ class Controller {
   }
 }
 
-module.exports = Controller;
+module.exports = IController;
