@@ -1,5 +1,5 @@
 const CustomerRepository = require('../../../../src/domains/customers/repositories/customer-repository');
-const CustomerModel = require('../../../../src/infra/database/models/customers');
+const CustomerModel = require('../../../../src/domains/customers/model/customers-model');
 const { expect } = require('chai');
 const { stub, assert: { calledOnce, calledWith, notCalled } } = require('sinon');
 const logger = require('../../../../src/config/logger');

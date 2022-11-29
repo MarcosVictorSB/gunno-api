@@ -1,9 +1,9 @@
 const TeamController = require('../controller/team-controller');
 const TeamRepository = require('../repositories/team-repository');
 const TeamService = require('../services/team-service');
+const TeamModel = require('../model/team-model');
 const { HttpResponseStatusCodes } = require('../../../protocols/httpResponseStatusCodes');
 
-const TeamModel = require('../../../infra/database/models/team');
 const logger = require('../../../config/logger');
 const errors = require('../../../helpers/errors/objective-errors');
 
