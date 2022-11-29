@@ -1,6 +1,6 @@
-const Controller = require('../../../interfaces/base-controller');
+const IController = require('../../../interfaces/base-controller');
 
-class AuthenticationController extends Controller {
+class AuthenticationController extends IController {
   constructor(params = {}) {
     super(params);
     this.serviceAuth = params.serviceAuth;

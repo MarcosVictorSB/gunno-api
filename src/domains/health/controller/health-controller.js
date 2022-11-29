@@ -1,7 +1,7 @@
-const Controller = require('../../../interfaces/base-controller');
+const IController = require('../../../interfaces/base-controller');
 const logger = require('../../../config/logger');
 
-class healthController extends Controller {
+class healthController extends IController {
   constructor(params = {}) {
     super(params);
     this.service = params.service;

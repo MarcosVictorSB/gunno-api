@@ -1,6 +1,6 @@
-const Controller = require('../../../interfaces/base-controller');
+const IController = require('../../../interfaces/base-controller');
 
-class InterestedController extends Controller {
+class InterestedController extends IController {
   constructor(params = {}) {
     super(params);
     this.logger = params.logger;
