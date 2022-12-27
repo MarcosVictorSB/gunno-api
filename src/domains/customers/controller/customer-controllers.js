@@ -12,8 +12,8 @@ class CustomerController extends IController {
   async create(request, response) {
     try {
       const customer = await this.validator.validateBodyParams(request.body);
-      const result = await this.service.create(customer);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.create(customer);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreatedUser}`);
       return this.errorHandler(error, request, response);
@@ -23,8 +23,8 @@ class CustomerController extends IController {
   async getByEmail(request, response) {
     try {
       const { email } = request.query;
-      const result = await this.service.getByEmail(email);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.getByEmail(email);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
       return this.errorHandler(error, request, response);
@@ -33,10 +33,10 @@ class CustomerController extends IController {
 
   async getAllCustomers(request, response) {
     try {
-      const result = await this.service.getAllCustomers();
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.getAllCustomers();
+      return response.status(status).json({ status, body });
     } catch (error) {
-      this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
+      this.logger.error({ error }, `[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
       return this.errorHandler(error, request, response);
     }
   }
@@ -44,19 +44,8 @@ class CustomerController extends IController {
   async forgetPassword(request, response) {
     try {
       const { email } = request.query;
-      const result = await this.service.forgetPassword(email);
-      return response.status(result.status).json(result.body);
-    } catch (error) {
-      this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
-      return this.errorHandler(error, request, response);
-    }
-  }
-
-  async delete(request, response) {
-    try {
-      const { id } = request.query;
-      const result = await this.service.delete(id);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.forgetPassword(email);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error(`[CUSTOMER CONTROLLER] - ${this.enumHelperCustomer.errorToCreateUser}`);
       return this.errorHandler(error, request, response);

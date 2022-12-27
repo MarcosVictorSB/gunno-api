@@ -15,7 +15,7 @@ const { getService: getServiceEmail } = require('../../email/factories');
 const getRepository = (params = {}) => new CustomerRepository({
   logger,
   model: CustomerModel,
-  httpResponseStatusCode: params.httpResponseStatusCode || new HttpResponseStatusCodes(),
+  httpResponseStatusCodes: params.httpResponseStatusCodes || new HttpResponseStatusCodes(),
 });
 
 const getService = (params = {}) => new CustomerService({
@@ -25,7 +25,7 @@ const getService = (params = {}) => new CustomerService({
   validator: params.validator || new CustomerValidator(),
   adapterEncryption: params.adapterEncryption || new AdapterEncryption({ bcrypt }),
   adapterToken: params.adapterToken || new AdapterToken(),
-  httpResponseStatusCode: params.httpResponseStatusCode || new HttpResponseStatusCodes(),
+  httpResponseStatusCodes: params.httpResponseStatusCodes || new HttpResponseStatusCodes(),
   emailService: params.emailService || getServiceEmail(),
   uuidv4: params.uuidv4 || uuidv4(),
 });

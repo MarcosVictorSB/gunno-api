@@ -9,6 +9,7 @@ const Customers = database.define(
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
     },
     name: {
       type: Sequelize.STRING,
