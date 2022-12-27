@@ -1,19 +1,12 @@
 const FIRST_POSITION = 0;
-class CustomerRepository {
+const IRepository = require('../../../interfaces/base-repository');
+
+class CustomerRepository extends IRepository {
   constructor(params = {}) {
+    super(params);
     this.logger = params.logger;
     this.model = params.model;
     this.httpResponseStatusCode = params.httpResponseStatusCode;
-  }
-
-  async create(customer) {
-    try {
-      const customerCreated = await this.model.create(customer);
-      return customerCreated.dataValues;
-    } catch (error) {
-      this.logger.error('[CUSTOMER REPOSITORY] - error to create customer');
-      return this.httpResponseStatusCode.serverError(error.message);
-    }
   }
 
   async getByEmail(email) {
@@ -36,15 +29,17 @@ class CustomerRepository {
     }
   }
 
-  async delete(id) {
-    try {
-      const customer = await this.model.destroy({ id, truncate: true });
-      return customer;
-    } catch (error) {
-      this.logger.error({ error }, '[CUSTOMER REPOSITORY DELETE] - error to delete user');
-      throw this.httpResponseStatusCode.serverError(error.message);
-    }
-  }
+  // async delete(id) {
+  //   try {
+  //     console.log({ id });
+  //     const customer = await this.model.destroy({ id, truncate: true });
+  //     console.log({ customer });
+  //     return customer;
+  //   } catch (error) {
+  //     this.logger.error({ error }, '[CUSTOMER REPOSITORY DELETE] - error to delete user');
+  //     throw this.httpResponseStatusCode.serverError(error.message);
+  //   }
+  // }
 }
 
 module.exports = CustomerRepository;

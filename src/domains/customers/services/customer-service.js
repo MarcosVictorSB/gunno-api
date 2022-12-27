@@ -1,11 +1,14 @@
-class CustomerService {
+const IService = require('../../../interfaces/base-service');
+
+class CustomerService extends IService {
   constructor(params = {}) {
+    super(params);
     this.repository = params.repository;
     this.enumHelperCustomer = params.enumHelperCustomer;
     this.logger = params.logger;
     this.adapterEncryption = params.adapterEncryption;
     this.adapterToken = params.adapterToken;
-    this.httpResponseStatusCode = params.httpResponseStatusCode;
+    this.httpResponseStatusCodes = params.httpResponseStatusCodes;
     this.emailService = params.emailService;
     this.uuidv4 = params.uuidv4;
   }
@@ -18,11 +21,10 @@ class CustomerService {
       const customerExists = await this.repository.getByEmail(email);
       if (customerExists) {
         this.logger.info(`[CUSTOMER SERVICE] - ${this.enumHelperCustomer.alreadyExists} : ${email}`);
-        return this.httpResponseStatusCode.conflict(this.enumHelperCustomer.alreadyExists);
+        return this.httpResponseStatusCodes.conflict(this.enumHelperCustomer.alreadyExists);
       }
 
       const newCustomer = {
-        id: this.uuidv4,
         name,
         email,
         password: await this.adapterEncryption.generateHashPassword(password),
@@ -33,15 +35,15 @@ class CustomerService {
 
       if (!customer) {
         this.logger.info(`[CUSTOMER SERVICE] - ${this.enumHelperCustomer.errorToCreateUser}`);
-        return this.httpResponseStatusCode.conflict(this.enumHelperCustomer.errorToCreateUser);
+        return this.httpResponseStatusCodes.conflict(this.enumHelperCustomer.errorToCreateUser);
       }
 
       const customerCreated = this.removePassword(customer);
       customerCreated.token = this.adapterToken.sign(customerCreated.id);
-      return this.httpResponseStatusCode.created(customerCreated);
+      return this.httpResponseStatusCodes.created(customerCreated);
     } catch (error) {
       this.logger.error('[CUSTOMER SERVICE] - error to create user');
-      return this.httpResponseStatusCode.serverError(error.message);
+      return this.httpResponseStatusCodes.serverError(error.message);
     }
   }
 
@@ -56,12 +58,12 @@ class CustomerService {
       let customer = await this.repository.getByEmail(email);
       if (!customer) {
         this.logger.info('[CUSTOMER SERVICE] - error to get user by email');
-        return this.httpResponseStatusCode.conflict(this.enumHelperCustomer.notFoundUser);
+        return this.httpResponseStatusCodes.conflict(this.enumHelperCustomer.notFoundUser);
       }
-      return this.httpResponseStatusCode.OK(customer);
+      return this.httpResponseStatusCodes.OK(customer);
     } catch (error) {
       this.logger.error('[CUSTOMER SERVICE] - error to get user by email');
-      return this.httpResponseStatusCode.serverError(error.message);
+      return this.httpResponseStatusCodes.serverError(error.message);
     }
   }
 
@@ -75,12 +77,12 @@ class CustomerService {
       const customers = await this.repository.getAllCustomers();
       if (!customers) {
         this.logger.info('[CUSTOMER SERVICE] - doesn\'t customers registered');
-        return this.httpResponseStatusCode.conflict(this.enumHelperCustomer.doNotCustomersRegistered);
+        return this.httpResponseStatusCodes.conflict(this.enumHelperCustomer.doNotCustomersRegistered);
       }
-      return this.httpResponseStatusCode.OK(customers);
+      return this.httpResponseStatusCodes.OK(customers);
     } catch (error) {
       this.logger.error('[CUSTOMER SERVICE] - intern error to get all customers');
-      return this.httpResponseStatusCode.serverError(error.message);
+      return this.httpResponseStatusCodes.serverError(error.message);
     }
   }
 
@@ -89,27 +91,16 @@ class CustomerService {
       const result = await this.getByEmail(emailCustomer);
       const customer = result.body.result;
       if (!customer) {
-        return this.httpResponseStatusCode.conflict(this.enumHelperCustomer.notFoundUser);
+        return this.httpResponseStatusCodes.conflict(this.enumHelperCustomer.notFoundUser);
       }
       const { name, email } = customer;
       const sendEmail = await this.emailService.sendEmailForgetPassword(name, email)
-      return this.httpResponseStatusCode.OK(sendEmail);
+      return this.httpResponseStatusCodes.OK(sendEmail);
     } catch (error) {
       this.logger.error('[CUSTOMER SERVICE] - error to get user by email');
-      return this.httpResponseStatusCode.serverError(error.message);
+      return this.httpResponseStatusCodes.serverError(error.message);
     }
-  }
-
-  async delete(id) {
-    try {
-      const customer = await this.repository.delete(id);
-      if (!customer) return this.httpResponseStatusCode.noContent('Usuario não encontrado');
-      return this.httpResponseStatusCode.OK('Usuario deletado');
-    } catch (error) {
-      this.logger.error('[CUSTOMER SERVICE DELETE] - error delete customer');
-      throw this.httpResponseStatusCode.serverError(error.message);
-    }
-  }
+  } 
 }
 
 module.exports = CustomerService;
