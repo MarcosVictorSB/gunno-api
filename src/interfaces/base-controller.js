@@ -13,8 +13,8 @@ class IController {
 
   async create(request, response) {
     try {
-      const result = await this.service.create(request.body);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.create(request.body);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error({ error }, '[CONTROLLER] - created');
       return this.errorHandler(error, request, response);
@@ -24,8 +24,8 @@ class IController {
   async getById(request, response) {
     try {
       const { id } = request.params;
-      const result = await this.service.getById(id);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.getById(id);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error({ error }, '[CONTROLLER] - error to get registry by id');
       return this.errorHandler(error, request, response);
@@ -36,8 +36,8 @@ class IController {
     try {
       const { id } = request.params;
       const params = request.body;
-      const result = await this.service.update(id, params);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.update(id, params);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error({ error }, '[CONTROLLER] - error to update registry');
       return this.errorHandler(error, request, response);
@@ -47,8 +47,8 @@ class IController {
   async delete(request, response) {
     try {
       const { id } = request.params;
-      const result = await this.service.delete(id);
-      return response.status(result.status).json(result.body);
+      const { status, body } = await this.service.delete(id);
+      return response.status(status).json({ status, body });
     } catch (error) {
       this.logger.error({ error }, '[CONTROLLER] - error to delete registry');
       return this.errorHandler(error, request, response);
