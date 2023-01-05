@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('../../../infra/database/models/db-connection');
+const database = require('../../../infra/database/conection/db-connection');
 
 const Teams = database.define(
   'Teams',
