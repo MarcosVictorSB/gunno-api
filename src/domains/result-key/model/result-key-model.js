@@ -30,6 +30,9 @@ const ResultKeys = database.define(
     idObjective: {
       type: Sequelize.UUID,
     },
+    idCustomer: {
+      type: Sequelize.UUID,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
