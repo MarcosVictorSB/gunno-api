@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const database = require('../../../infra/database/conection/db-connection');
+// const Objectives = require('../../objective/model/objective-model');
 
 const ResultKeys = database.define(
   'ResultKeys',
@@ -26,6 +27,12 @@ const ResultKeys = database.define(
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    idObjective: {
+      type: Sequelize.UUID,
+    },
+    idCustomer: {
+      type: Sequelize.UUID,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
@@ -43,5 +50,10 @@ const ResultKeys = database.define(
     paranoid: true,
   },
 );
+
+// ResultKeys.belongsTo(Objectives, {
+//   constraint: true,
+//   foreignKey: 'idObjective',
+// });
 
 module.exports = ResultKeys;
