@@ -17,6 +17,7 @@ class ObjectiveService extends IService {
         name: params.name,
         quarter: this.helpers.getCurrentQuarter(),
         year: this.helpers.getCurrentYear(),
+        idTeam: params.idTeam,
       };
       const result = await this.repository.create(newParams);
       return this.httpResponseStatusCodes.created(result);

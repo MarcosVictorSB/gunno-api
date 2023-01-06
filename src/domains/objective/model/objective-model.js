@@ -13,6 +13,9 @@ const Objectives = database.define(
     name: {
       type: Sequelize.STRING,
     },
+    idTeam: {
+      type: Sequelize.UUID,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
